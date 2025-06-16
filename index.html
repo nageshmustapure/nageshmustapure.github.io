@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nagesh Mustapure - Data Scientist | AI Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Added font for the new 3D cube -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 1. CSS Variables & Enhanced Futurist Reset */
+        :root {
+            --primary-color: #00aeff; /* Cyber Blue */
+            --secondary-color: #ff3c78; /* Neon Pink */
+            --accent-color: #00f5d4; /* Teal Accent */
+            --glow-color-primary: rgba(0, 174, 255, 0.5);
+            --glow-color-secondary: rgba(255, 60, 120, 0.6);
+
+            --bg-dark: #0a0a14; /* Deep Space Navy */
+            --bg-dark-translucent: rgba(10, 10, 20, 0.1);
+            --bg-glass: rgba(20, 22, 41, 0.45);
+            --border-glass: rgba(255, 255, 255, 0.1);
+            
+            --text-primary: #f0f3f8;
+            --text-secondary: #aab0bc;
+            --text-tertiary: #717a8c;
+            
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            
+            --shadow-glow-sm: 0 0 15px var(--glow-color-primary);
+            --shadow-glow-md: 0 0 25px var(--glow-color-primary);
+            --shadow-glow-lg: 0 0 45px var(--glow-color-primary);
+
+            --transition-fast: 0.2s;
+            --transition-medium: 0.4s;
+            --transition-slow: 0.6s;
+            --transition-timing: cubic-bezier(0.2, 0.8, 0.2, 1);
+            
+            --border-radius-sm: 8px;
+            --border-radius-md: 12px;
+            --border-radius-lg: 16px;
+
+            /* Added variable for new cube */
+            --cube-size: 350px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.7;
+            color: var(--text-secondary);
+            background-color: var(--bg-dark);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Aurora Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: 
+                radial-gradient(ellipse 80% 80% at 20% -10%, var(--glow-color-primary), transparent),
+                radial-gradient(ellipse 80% 80% at 80% 110%, var(--glow-color-secondary), transparent);
+            z-index: -2;
+            animation: move-aurora 20s linear infinite;
+        }
+
+        @keyframes move-aurora {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, 20px) rotate(5deg); }
+            50% { transform: translate(0, -10px) rotate(-5deg); }
+            75% { transform: translate(-10px, 10px) rotate(3deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* Subtle Noise Texture Overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
+        .icon-svg { display: inline-block; width: 1em; height: 1em; vertical-align: -0.15em; fill: currentColor; }
+        .icon-leading { margin-right: 0.8em; font-size: 1.3em; vertical-align: -0.25em; }
+
+        /* 2. Typography & Headings */
+        h1, h2, h3, h4 { font-family: var(--font-heading); font-weight: 700; line-height: 1.3; color: var(--text-primary); }
+        h1 { font-size: clamp(3rem, 6vw, 4.5rem); margin-bottom: 1rem; line-height: 1.1; letter-spacing: -2px; }
+        h1 .highlight { 
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+            animation: gradient-text-flow 5s ease infinite;
+            background-size: 200% 200%;
+        }
+        @keyframes gradient-text-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        h2 { 
+            font-size: clamp(2.4rem, 5vw, 3.2rem); 
+            margin-bottom: 4rem; text-align: center; 
+            position: relative; padding-bottom: 1.5rem; 
+        }
+        h2::after { 
+            content: ''; position: absolute; left: 50%; transform: translateX(-50%); 
+            bottom: 0; width: 80px; height: 4px; 
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)); 
+            border-radius: 2px;
+            box-shadow: 0 0 15px var(--glow-color-primary);
+        }
+        h3 { font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: 600; color: var(--text-primary); }
+        p { margin-bottom: 1.6rem; font-size: 1.05rem; }
+        a { color: var(--accent-color); text-decoration: none; position: relative; }
+        a:not(.btn):hover { color: var(--text-primary); }
+        a:not(.btn)::after {
+            content: ''; position: absolute; width: 100%;
+            transform: scaleX(0); height: 2px; bottom: -3px; left: 0;
+            background: var(--accent-color);
+            transform-origin: bottom right;
+            transition: transform var(--transition-medium) var(--transition-timing);
+        }
+        a:not(.btn):hover::after { transform: scaleX(1); transform-origin: bottom left; }
+        a[href*="[YOUR_"] { color: var(--text-tertiary); cursor: not-allowed; opacity: 0.6; pointer-events: none; }
+        a[href*="[YOUR_"]::after { display: none; }
+
+        /* 3. Header */
+        header { 
+            background-color: var(--bg-dark-translucent);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            padding: 1.5rem 0; position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid var(--border-glass);
+            transition: all var(--transition-medium) var(--transition-timing);
+        }
+        header .container { display: flex; justify-content: space-between; align-items: center; }
+        header .logo { font-size: 1.8rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.8px; }
+        header nav ul { list-style: none; display: flex; gap: 2.5rem; }
+        header nav ul li a { 
+            color: var(--text-secondary); font-weight: 500; font-family: var(--font-heading); 
+            font-size: 1rem; padding: 10px 5px; position: relative; text-decoration: none; 
+            transition: color var(--transition-medium) ease, text-shadow var(--transition-medium) ease;
+        }
+        header nav ul li a::after {
+            content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px; transform: scaleX(0);
+            transform-origin: center;
+            transition: transform var(--transition-medium) var(--transition-timing);
+        }
+        header nav ul li a:hover, header nav ul li a.active { 
+            color: var(--text-primary);
+            text-shadow: 0 0 8px var(--glow-color-primary);
+        }
+        header nav ul li a:hover::after, header nav ul li a.active::after { transform: scaleX(1); }
+
+        /* 4. Sections & Layout */
+        section { padding: 7rem 0; position: relative; }
+        #hero { padding: 8rem 0; min-height: 100vh; display: flex; align-items: center; }
+        /* Angled Section Separator */
+        section:not(#hero) { margin-top: -1px; }
+        .angled-separator {
+            clip-path: polygon(0 0, 100% 10vh, 100% 100%, 0 90%);
+            background-color: #0d0d1a; /* slightly different from body */
+        }
+        .angled-separator-reverse {
+            clip-path: polygon(0 10vh, 100% 0, 100% 90%, 0 100%);
+            background-color: var(--bg-dark);
+        }
+
+        /* 5. Hero Section */
+        #hero .container { display: flex; justify-content: space-between; align-items: center; gap: 4rem; }
+        #hero .hero-content { flex: 1; max-width: 650px; }
+        #hero .subtitle { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 500; color: var(--primary-color); margin: 1.5rem 0; letter-spacing: -0.5px; text-shadow: 0 0 10px var(--glow-color-primary); }
+        #hero p:not(.subtitle) { font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 2.5rem; }
+        .btn { 
+            display: inline-flex; align-items: center; justify-content: center; 
+            padding: 1rem 2.2rem; border-radius: 50px; text-decoration: none;
+            font-weight: 600; font-family: var(--font-heading); 
+            transition: all var(--transition-medium) var(--transition-timing);
+            cursor: pointer; border: 2px solid transparent; 
+            font-size: 1.05rem; letter-spacing: 0.5px; 
+            position: relative; overflow: hidden; z-index: 1;
+        }
+        .btn-primary { 
+            background: linear-gradient(95deg, var(--primary-color) 0%, var(--secondary-color) 100%); 
+            color: var(--text-primary); 
+            box-shadow: 0 5px 20px rgba(255, 60, 120, 0.3);
+        }
+        .btn-primary:hover { 
+            transform: translateY(-5px) scale(1.03); 
+            box-shadow: 0 8px 30px rgba(0, 174, 255, 0.4); 
+        }
+        .btn-secondary { 
+            background-color: transparent; 
+            color: var(--text-primary);
+            border: 2px solid var(--border-glass); 
+            margin-left: 1rem;
+        }
+        .btn-secondary:hover { 
+            background-color: var(--bg-glass);
+            border-color: var(--primary-color);
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 0 15px var(--glow-color-primary);
+        }
+        #hero .contact-info { margin-top: 3.5rem; display: flex; flex-wrap: wrap; gap: 1.2rem 2.5rem; }
+        #hero .contact-info p { color: var(--text-tertiary); font-size: 1rem; display: flex; align-items: center; gap: 0.8rem; margin: 0; }
+        #hero .contact-info p .icon-svg { color: var(--primary-color); font-size: 1.4em; }
+        #hero .contact-info p a { color: var(--text-secondary); font-weight: 500; }
+        
+        /* --- START: UPDATED Hero Visual Element (Dynamic Skills Cube) --- */
+        #hero .hero-visual {
+            flex-shrink: 0;
+            perspective: 1800px;
+        }
+        .cube {
+            width: var(--cube-size);
+            height: var(--cube-size);
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate-cube 40s infinite linear;
+        }
+        @keyframes rotate-cube {
+            from { transform: rotateY(0deg) rotateX(10deg); }
+            to { transform: rotateY(360deg) rotateX(370deg); }
+        }
+        .cube-face {
+            position: absolute;
+            width: var(--cube-size);
+            height: var(--cube-size);
+            border: 1px solid var(--primary-color);
+            background: rgba(0, 174, 255, 0.05);
+            backdrop-filter: blur(3px);
+            box-shadow: inset 0 0 40px rgba(0, 174, 255, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .front  { transform: rotateY(0deg)   translateZ(calc(var(--cube-size) / 2)); }
+        .back   { transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2)); }
+        .right  { transform: rotateY(90deg)  translateZ(calc(var(--cube-size) / 2)); }
+        .left   { transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2)); }
+        .top    { transform: rotateX(90deg)  translateZ(calc(var(--cube-size) / 2)); }
+        .bottom { transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2)); }
+
+        .cube-face h2 {
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glow-text 4s infinite ease-in-out;
+            z-index: 2;
+            text-shadow: 0 0 5px #a3e6ff;
+            transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+        }
+        .cube-face h2.text-fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        @keyframes glow-text {
+            0%, 100% {
+                color: #a3e6ff;
+                text-shadow: 0 0 7px #a3e6ff, 0 0 10px #a3e6ff;
+            }
+            50% {
+                color: #ffffff;
+                text-shadow: 0 0 20px rgba(0, 174, 255, 0.7), 0 0 35px rgba(0, 174, 255, 0.7);
+            }
+        }
+        
+        .face-network {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .nn-node {
+            position: absolute;
+            width: 12px; height: 12px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--primary-color);
+            opacity: 0.6;
+        }
+        .nn-pulse {
+            position: absolute;
+            width: 7px; height: 7px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #fff, 0 0 12px var(--primary-color);
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            opacity: 0;
+        }
+        @keyframes pulse-path-1 {
+            0%   { transform: translate(0, 0); opacity: 1; }
+            80%  { transform: translate(240px, 0px); opacity: 1; }
+            100% { transform: translate(240px, 0px); opacity: 0; }
+        }
+        @keyframes pulse-path-2 {
+            0%   { transform: translate(0, 0); opacity: 1; }
+            80%  { transform: translate(180px, 110px); opacity: 1; }
+            100% { transform: translate(180px, 110px); opacity: 0; }
+        }
+        @keyframes pulse-path-3 {
+            0%   { transform: translate(0, 0); opacity: 1; }
+            80%  { transform: translate(-120px, -60px); opacity: 1; }
+            100% { transform: translate(-120px, -60px); opacity: 0; }
+        }
+        /* --- END: UPDATED Hero Visual Element --- */
+
+
+        /* 6. Generic Card Styling */
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-glass);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform var(--transition-medium) var(--transition-timing), box-shadow var(--transition-medium) var(--transition-timing);
+            will-change: transform;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: var(--border-radius-lg);
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity var(--transition-medium) ease-in-out;
+        }
+        .glass-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        .glass-card:hover::before { opacity: 1; }
+
+        /* 7. About & Summary Section */
+        #about p, #summary p { max-width: 900px; font-size: 1.1rem; margin-left: auto; margin-right: auto; text-align: center; line-height: 1.8; }
+        #summary { background-color: rgba(13, 13, 26, 0.7); } /* Slightly different BG for variety */
+
+        /* 8. Projects Section */
+        #projects {
+            padding-bottom: 12rem;
+        }
+        #projects .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 2.5rem; margin-bottom: 5rem; }
+        .project-card { 
+            height: 100%; 
+            display: flex; flex-direction: column;
+            padding: 2rem;
+        }
+        .project-card h3 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--accent-color); }
+        .project-card .description { flex-grow: 1; margin-bottom: 1.5rem; font-size: 1rem; }
+        .project-card .tech-label, .project-card .highlights-label { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); text-transform: uppercase; margin: 1.2rem 0 1rem 0; letter-spacing: 1px; }
+        .project-card .tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1rem; }
+        .project-card .tags span {
+            background-color: var(--bg-dark-translucent);
+            color: var(--primary-color);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border-glass);
+            transition: all var(--transition-fast) ease;
+        }
+        .project-card .tags span:hover { background-color: var(--primary-color); color: var(--bg-dark); transform: scale(1.05); }
+        .project-card ul { list-style: none; padding: 0; font-size: 0.95rem; }
+        .project-card ul li { position: relative; padding-left: 1.8em; margin-bottom: 0.6rem; }
+        .project-card ul li::before { 
+            content: '✓';
+            position: absolute; left: 0; top: 0; 
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+        #projects h3.other-projects-title { text-align: center; margin-top: 6rem; font-size: 2.2rem; color: var(--text-primary); padding-bottom: 1rem; margin-bottom: 3.5rem; border-bottom: 2px solid var(--border-glass); display: inline-block; }
+        
+        /* Animated Timeline */
+        .timeline { position: relative; max-width: 950px; margin: 0 auto; padding: 2rem 0; }
+        .timeline::before { 
+            content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+            width: 4px; background: var(--border-glass); border-radius: 2px;
+        }
+        .timeline-progress {
+            position: absolute; left: 10px; top: 0; width: 4px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+            border-radius: 2px; height: 0;
+            transition: height var(--transition-slow) var(--transition-timing);
+        }
+        .timeline-item { margin-bottom: 4rem; position: relative; padding-left: 4rem; opacity: 0; transform: translateX(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        .timeline-item.is-visible { opacity: 1; transform: translateX(0); }
+        .timeline-item::before { 
+            content: ''; display: block; width: 24px; height: 24px;
+            background-color: var(--bg-dark);
+            border: 4px solid var(--primary-color);
+            border-radius: 50%; position: absolute; left: 0px; top: 0.2em;
+            z-index: 1; transition: all var(--transition-medium) var(--transition-timing);
+            box-shadow: 0 0 0 4px var(--bg-dark), 0 0 15px var(--glow-color-primary);
+        }
+        .timeline-item:hover::before { 
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transform: scale(1.2); 
+            box-shadow: 0 0 0 4px var(--bg-dark), 0 0 25px var(--glow-color-secondary);
+        }
+        .timeline-item ul { list-style: none; padding: 0; margin-top: 1rem; }
+        .timeline-item ul li { position: relative; padding-left: 2em; margin-bottom: 0.5rem; }
+        .timeline-item ul li::before {
+            content: '›'; position: absolute; left: 0; font-size: 1.5em; line-height: 1; color: var(--primary-color);
+        }
+
+        /* 9. Skills & Competencies Sections */
+        #skills .skills-container, #core-competencies .skills-container { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); 
+            gap: 2.5rem; 
+        }
+        #core-competencies .competencies-container { max-width: 950px; margin: 0 auto; }
+        .skills-category { margin-bottom: 0; }
+        .skills-category h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-glass);
+            padding-bottom: 1rem;
+            display: flex; align-items: center;
+        }
+        .skills-list { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+        .skills-list span {
+            background-color: var(--bg-dark-translucent);
+            color: var(--text-secondary);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.9rem; font-weight: 500;
+            border: 1px solid transparent;
+            transition: all var(--transition-fast) ease;
+        }
+        .skills-list span:hover {
+            color: var(--text-primary);
+            background-color: var(--bg-glass);
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 0 10px rgba(0, 245, 212, 0.3);
+        }
+
+        /* 10. Beyond The Code Section */
+        #beyond-code .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            max-width: 1100px;
+            margin: 2rem auto 0 auto;
+        }
+        .info-card {
+            text-align: center;
+            padding: 2rem;
+            flex: 1 1 300px;
+            max-width: 350px;
+        }
+        .info-card .icon-wrapper {
+            font-size: 2.2rem;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            width: 65px; height: 65px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            box-shadow: 0 0 20px var(--glow-color-secondary);
+            transition: all var(--transition-medium) var(--transition-timing);
+        }
+        .info-card:hover .icon-wrapper { transform: scale(1.1) rotate(-10deg); box-shadow: 0 0 30px var(--glow-color-primary); }
+        .info-card p { font-size: 1rem; flex-grow: 1; }
+        
+        /* 11. Education & Certifications Section */
+        #education .edu-cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 2.5rem; max-width: 1100px; margin: 0 auto; }
+        .education-col, .certifications-col { padding: 2.5rem; }
+        .edu-item h4 { font-size: 1.3rem; color: var(--primary-color); margin-bottom: 0.3rem; }
+        .edu-item p { font-size: 1rem; color: var(--text-tertiary); margin: 0; line-height: 1.6; }
+        .edu-item p:not(:last-child) { margin-bottom: 0.2rem; }
+        .cert-list { list-style: none; padding: 0; }
+        .cert-list li { padding-left: 2em; position: relative; margin-bottom: 1rem; }
+        .cert-list li::before {
+             content: ''; position: absolute; left: 0; top: 0.3em;
+             width: 1.2em; height: 1.2em; background-color: var(--accent-color);
+             mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z' fill='%23fff'/%3E%3C/svg%3E");
+             mask-size: contain; -webkit-mask-size: contain;
+        }
+        li:has(> a[href*="[YOUR_"]) { opacity: 0.5; }
+
+        /* 12. Contact Section */
+        #contact .contact-intro { max-width: 750px; margin: 0 auto 4.5rem auto; text-align: center; font-size: 1.1rem; }
+        #contact .contact-grid-wrapper {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            padding: clamp(2rem, 5vw, 4rem);
+            border-radius: var(--border-radius-lg);
+            max-width: 1150px; margin: 0 auto;
+        }
+        #contact .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: center; }
+        #contact .detail-item { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
+        #contact .detail-item .icon-svg { 
+            color: var(--primary-color); font-size: 2rem; flex-shrink: 0;
+            background: var(--bg-dark-translucent);
+            padding: 1rem; border-radius: 50%;
+            border: 1px solid var(--border-glass);
+            transition: all var(--transition-medium) var(--transition-timing);
+        }
+        #contact .detail-item:hover .icon-svg { transform: scale(1.1) rotate(-5deg); box-shadow: var(--shadow-glow-sm); }
+        #contact .detail-label { font-weight: 700; color: var(--text-primary); margin-bottom: 0.2rem; font-size: 1.1rem; }
+        #contact .detail-value { color: var(--text-secondary); font-size: 1rem; }
+        #contact label { display: block; margin-bottom: 0.8rem; font-weight: 500; color: var(--text-secondary); font-size: 0.9rem; }
+        #contact input, #contact textarea {
+            width: 100%; padding: 1rem 1.2rem; border: 1px solid var(--border-glass);
+            border-radius: var(--border-radius-sm); font-family: var(--font-body); font-size: 1rem;
+            background-color: var(--bg-dark-translucent); color: var(--text-primary);
+            transition: border-color var(--transition-medium), box-shadow var(--transition-medium);
+        }
+        #contact input:focus, #contact textarea:focus {
+            outline: none; border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 174, 255, 0.2), var(--shadow-glow-sm);
+        }
+        #contact textarea { resize: vertical; min-height: 150px; }
+        #contact ::placeholder { color: var(--text-tertiary); }
+        #contact button[type="submit"] { margin-top: 1.5rem; width: 100%; }
+        #contact #form-success-message {
+            display: none; padding: 1.5rem;
+            background-color: rgba(0, 245, 212, 0.1);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: var(--border-radius-md); text-align: center;
+        }
+
+        /* 13. Footer */
+        footer { 
+            text-align: center; padding: 4rem 0 3rem 0; 
+            background-color: transparent;
+            border-top: 1px solid var(--border-glass);
+            margin-top: 5rem;
+        }
+        footer .social-links { margin-bottom: 2rem; }
+        footer .social-links a { 
+            color: var(--text-secondary); margin: 0 1rem; font-size: 1.8rem;
+            transition: all var(--transition-medium) var(--transition-timing); display: inline-block;
+        }
+        footer .social-links a:hover { color: var(--primary-color); transform: translateY(-5px) scale(1.1); text-shadow: var(--shadow-glow-sm); }
+        footer p { color: var(--text-tertiary); font-size: 0.9rem; margin: 0; }
+        footer .heart { color: var(--secondary-color); animation: pulse-heart 1.5s infinite ease-in-out; display: inline-block; }
+        @keyframes pulse-heart { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2); } }
+
+        /* 14. Animation & Interactivity Classes */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s var(--transition-timing), transform 0.8s var(--transition-timing); }
+        .fade-in.is-visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+
+        /* 15. Scroll-to-Top Button */
+        #scroll-to-top {
+            position: fixed; bottom: -100px; right: 30px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--text-primary); border: none; border-radius: 50%;
+            width: 50px; height: 50px; font-size: 1.5rem;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; box-shadow: 0 5px 20px var(--glow-color-secondary);
+            opacity: 0; visibility: hidden;
+            transition: all 0.5s var(--transition-timing); z-index: 999;
+        }
+        #scroll-to-top.visible { opacity: 1; visibility: visible; bottom: 30px; }
+        #scroll-to-top:hover { transform: scale(1.1); box-shadow: 0 8px 30px var(--glow-color-primary); }
+
+        /* 16. Responsive Design */
+        @media (max-width: 1024px) {
+            #hero .container { flex-direction: column; text-align: center; }
+            #hero .hero-visual { margin-top: 4rem; transform: scale(0.8); }
+            #hero .contact-info { justify-content: center; }
+        }
+        @media (max-width: 768px) {
+            html { font-size: 15px; }
+            section { padding: 5rem 0; }
+            .angled-separator, .angled-separator-reverse { clip-path: polygon(0 0, 100% 5vh, 100% 100%, 0 95%); }
+            header { padding: 1.2rem 0; }
+            header .container { flex-direction: column; gap: 1rem; }
+            header nav ul { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+            #contact .contact-grid { grid-template-columns: 1fr; }
+            #contact .contact-details { display: grid; grid-template-columns: 1fr 1fr; text-align: center; }
+            #contact .detail-item { flex-direction: column; }
+        }
+        @media (max-width: 480px) {
+            .container { padding: 0 20px; }
+            .btn { width: 100%; margin: 0.5rem 0; }
+            .btn-secondary { margin-left: 0; }
+            #hero .hero-visual { transform: scale(0.7); }
+            #hero .contact-info { flex-direction: column; align-items: center; gap: 1.5rem; }
+            #contact .contact-details { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- SVG Icons Definition (No changes needed, keeping it as is) -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="icon-email" viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25A1.003 1.003 0 0 1 4 7.3V6h16v1.3c0 .32-.16.61-.4.75zM4 18v-7.8l7.48 4.67c.14.09.3.13.46.13s.32-.04.46-.13L20 10.2V18H4z"/></symbol>
+        <symbol id="icon-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zm-11.3 4.77H5.3V19h2.4V7.77zM6.5 5.13A1.37 1.37 0 1 0 6.5 7.9a1.37 1.37 0 0 0 0-2.77zM19 19h-2.38v-4.97c0-1.24-.44-2.09-1.55-2.09-1.11 0-1.7.74-1.98 1.45c-.1.25-.13.6-.13.95V19h-2.38V7.77h2.38v1.03c.34-.55 1.07-1.13 2.28-1.13 1.66 0 2.9 1.09 2.9 3.44V19z"/></symbol>
+        <symbol id="icon-location" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></symbol>
+        <symbol id="icon-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.475 2 2 6.475 2 12a9.994 9.994 0 0 0 6.838 9.488c.5.087.687-.213.687-.476 0-.237-.013-1.024-.013-1.862-2.512.463-3.162-.612-3.362-1.175-.113-.288-.6-1.175-1.025-1.413-.35-.187-.85-.65-.013-.662.788-.013 1.35.725 1.538 1.025.9 1.512 2.338 1.087 2.912.825.088-.65.35-1.087.638-1.337-2.225-.25-4.55-1.113-4.55-4.938 0-1.088.387-1.987 1.025-2.688-.1-.25-.45-1.275.1-2.65 0 0 .837-.262 2.75 1.026a9.58 9.58 0 0 1 5 0c1.912-1.3 2.75-1.026 2.75-1.026.55 1.375.2 2.4.1 2.65.637.7 1.025 1.6 1.025 2.688 0 3.837-2.337 4.688-4.562 4.938.362.312.675.912.675 1.85 0 1.337-.013 2.412-.013 2.75 0 .262.188.574.688.474A10.016 10.016 0 0 0 22 12c0-5.525-4.475-10-10-10z"/></symbol>
+        <symbol id="icon-send" viewBox="0 0 24 24"><path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></symbol>
+        <symbol id="icon-checkmark" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></symbol>
+        <symbol id="icon-arrow-up" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></symbol>
+        <symbol id="icon-loading" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M12 3a9 9 0 1 1-6.219 15.542" stroke-dasharray="60" stroke-dashoffset="60"><animate attributeName="stroke-dashoffset" values="60;0" dur="1.5s" repeatCount="indefinite"></animate></path></symbol>
+        <symbol id="icon-article" viewBox="0 0 24 24"><path fill="currentColor" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></symbol>
+        <symbol id="icon-briefcase" viewBox="0 0 24 24"><path fill="currentColor" d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM10 4h4v2h-4V4zm10 15H4V8h16v11z"/></symbol>
+        <symbol id="icon-code" viewBox="0 0 24 24"><path fill="currentColor" d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></symbol>
+        <symbol id="icon-database" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3C7.03 3 3 5.36 3 8.5c0 1.99 1.53 3.71 3.59 4.38C6.84 13.17 6.99 13.5 7 14H4c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2h-3c.01-.5.16-.83.41-1.12C19.47 12.21 21 10.49 21 8.5 21 5.36 16.97 3 12 3zm0 2c3.31 0 6 1.12 6 2.5S15.31 10 12 10 6 8.88 6 7.5 8.69 5 12 5zm-8 11h16v4H4v-4z"/></symbol>
+        <symbol id="icon-ai-brain" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 14.5V18h3v-1.5c1.93 0 3.5-1.57 3.5-3.5s-1.57-3.5-3.5-3.5h-3c-1.93 0-3.5 1.57-3.5 3.5v.5H7c-.55 0-1 .45-1 1s.45 1 1 1h1.5v.5c0 1.93 1.57 3.5 3.5 3.5zm0-5H12v-2h1.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5zm-3 0h1.5v-2H9c-.83 0-1.5.67-1.5 1.5S8.17 11.5 9 11.5z"/></symbol>
+        <symbol id="icon-gen-ai" viewBox="0 0 24 24"> <path fill="currentColor" d="M17.21 9c1.05 0 1.9.85 1.9 1.9s-.85 1.9-1.9 1.9-1.9-.85-1.9-1.9.85-1.9 1.9-1.9zm-6.5 0c1.05 0 1.9.85 1.9 1.9s-.85 1.9-1.9 1.9-1.9-.85-1.9-1.9.85-1.9 1.9-1.9zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-1.86 0-3.45-1.12-4.12-2.7h8.24c-.67 1.58-2.26 2.7-4.12 2.7z"/></symbol>
+        <symbol id="icon-graduation-cap" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 8.11L6.09 8 12 4.6 17.91 8 12 11.11zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></symbol>
+        <symbol id="icon-certificate" viewBox="0 0 24 24"> <path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/> </symbol>
+        <symbol id="icon-lightbulb" viewBox="0 0 24 24"><path fill="currentColor" d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19c-3.86 0-7 3.14-7 7c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74c0-3.86-3.14-7-7-7zm2.83 8.88L14 12.17V14h-4v-1.83l-.83-1.29C7.92 10.01 7 8.6 7 7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.6-.92 3.01-2.17 3.88z"/></symbol>
+        <symbol id="icon-tools" viewBox="0 0 24 24"><path fill="currentColor" d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9c-2-2-5-2.4-7.4-1.3L9 6L6 9L1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></symbol>
+        <symbol id="icon-star" viewBox="0 0 24 24"><path fill="currentColor" d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zm4.24 16L12 15.45L7.77 18l1.12-4.92L4 9.09l4.84-.42L12 4l2.16 4.67l4.84.42l-4.89 4L16.23 18z"/></symbol>
+        <symbol id="icon-presentation" viewBox="0 0 24 24"><path fill="currentColor" d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12zm-9-5.5l4 4l-1.41 1.41l-2.59-2.58l-2.59 2.58L7 15.5l4-4zM7 9h10v2H7z"/></symbol>
+        <symbol id="icon-community" viewBox="0 0 24 24"><path fill="currentColor" d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05c1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></symbol>
+    </svg>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Nagesh Mustapure</a>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="#about" data-section="about">About</a></li>
+                    <li><a href="#summary" data-section="summary">Summary</a></li>
+                    <li><a href="#projects" data-section="projects">Projects</a></li>
+                    <li><a href="#skills" data-section="skills">Skills</a></li>
+                    <li><a href="#core-competencies" data-section="core-competencies">Competencies</a></li>
+                    <li><a href="#education" data-section="education">Education</a></li>
+                    <li><a href="#contact" data-section="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" data-section="hero">
+            <div class="container">
+                <div class="hero-content fade-in">
+                    <h1>
+                        Nagesh Mustapure<br>
+                        <span class="highlight">Data Scientist & AI Engineer</span>
+                    </h1>
+                    <p class="subtitle">Crafting Intelligent Solutions with Data & Generative AI</p>
+                    <p>
+                        Results-driven AI specialist with 5+ years designing, building, and deploying enterprise-grade AI/ML solutions. Expertise in Generative AI, LLMs, NLP, and scalable data pipelines across diverse industries.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">
+                            Get In Touch <svg class="icon-svg" style="margin-left: 0.5em;"><use xlink:href="#icon-send"></use></svg>
+                        </a>
+                        <a href="#projects" class="btn btn-secondary">View My Work</a>
+                    </div>
+                    <div class="contact-info">
+                         <p><svg class="icon-svg"><use xlink:href="#icon-email"></use></svg><a href="mailto:nageshmustapure96@gmail.com">nageshmustapure96@gmail.com</a></p>
+                         <p><svg class="icon-svg"><use xlink:href="#icon-phone"></use></svg><a href="tel:+918485060139">+91 8485060139</a></p>
+                         <p><svg class="icon-svg"><use xlink:href="#icon-linkedin"></use></svg><a href="https://linkedin.com/in/nageshmustapure" target="_blank" rel="noopener noreferrer">LinkedIn Profile</a></p>
+                         <p><svg class="icon-svg"><use xlink:href="#icon-location"></use></svg>Hyderabad, India</p>
+                    </div>
+                </div>
+                <!-- UPDATED hero-visual div with new dynamic cube -->
+                <div class="hero-visual fade-in delay-2">
+                    <div class="cube">
+                        <div class="cube-face front">  <h2></h2> <div class="face-network"> <div class="nn-node" style="top: 20%; left: 15%;"></div> <div class="nn-node" style="top: 80%; left: 15%;"></div> <div class="nn-node" style="top: 50%; left: 85%;"></div> <div class="nn-pulse" style="top: 20%; left: 15%; animation-name: pulse-path-1; animation-delay: 0.1s;"></div> </div> </div>
+                        <div class="cube-face back">   <h2></h2> <div class="face-network"> <div class="nn-node" style="top: 10%; left: 10%;"></div> <div class="nn-node" style="top: 50%; left: 50%;"></div> <div class="nn-node" style="top: 90%; left: 90%;"></div> <div class="nn-pulse" style="top: 10%; left: 10%; animation-name: pulse-path-2; animation-delay: 0.5s;"></div> </div> </div>
+                        <div class="cube-face right">  <h2></h2> <div class="face-network"> <div class="nn-node" style="top: 20%; left: 80%;"></div> <div class="nn-node" style="top: 50%; left: 20%;"></div> <div class="nn-pulse" style="top: 20%; left: 80%; animation-name: pulse-path-3; animation-delay: 0.8s;"></div> </div> </div>
+                        <div class="cube-face left">   <h2></h2> <div class="face-network"> <div class="nn-node" style="top: 20%; left: 15%;"></div> <div class="nn-node" style="top: 80%; left: 15%;"></div> <div class="nn-node" style="top: 50%; left: 85%;"></div> <div class="nn-pulse" style="top: 80%; left: 15%; animation-name: pulse-path-1; animation-delay: 2s;"></div> </div> </div>
+                        <div class="cube-face top">    <h2></h2> <div class="face-network"> <div class="nn-node" style="top: 10%; left: 10%;"></div> <div class="nn-node" style="top: 90%; left: 90%;"></div> <div class="nn-pulse" style="top: 10%; left: 10%; animation-name: pulse-path-2; animation-delay: 1.2s;"></div> </div> </div>
+                        <div class="cube-face bottom"> <h2></h2> <div class="face-network"> <div class="nn-node" style="top: 50%; left: 50%;"></div> <div class="nn-pulse" style="top: 50%; left: 50%; animation-name: pulse-path-3; animation-delay: 2.3s;"></div> </div> </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" data-section="about" class="angled-separator">
+            <div class="container">
+                <h2 class="fade-in">About Me</h2>
+                <p class="fade-in delay-1">
+                    I am a passionate Data Scientist and AI Engineer thriving at the confluence of advanced AI techniques and real-world applications. My focus is on harnessing the power of Generative AI, Large Language Models (LLMs), Machine Learning, and NLP to build innovative, robust, and scalable solutions that drive significant business value.
+                </p>
+                <p class="fade-in delay-2">
+                    With nearly four years dedicated to crafting enterprise-level AI systems, I possess a deep understanding of the entire development lifecycle – from meticulous data analysis and feature engineering to sophisticated model architecture, rigorous MLOps deployment, and continuous performance optimization. I excel in translating complex business requirements into tangible technological solutions.
+                </p>
+                 <p class="fade-in delay-3">
+                    Beyond technical proficiency, I am a strong communicator and collaborator, adept at bridging the gap between technical teams and business stakeholders. I am committed to lifelong learning, constantly exploring the frontiers of AI to deliver cutting-edge results. Let's connect and explore how we can leverage AI to achieve your goals.
+                 </p>
+            </div>
+        </section>
+
+        <!-- Professional Summary Section -->
+        <section id="summary" data-section="summary" class="angled-separator-reverse">
+            <div class="container">
+                <h2 class="fade-in">Professional Summary</h2>
+                <p class="fade-in delay-1">
+                    An accomplished AI Engineer & Data Scientist with 5+ years of comprehensive experience delivering high-impact AI/ML projects. Expertise encompasses the end-to-end pipeline: data strategy, preprocessing, model development (Generative AI, LLMs, NLP, Classic ML), MLOps deployment, and ongoing monitoring/improvement.
+                </p>
+                <p class="fade-in delay-2">
+                    Proficient in leveraging frameworks like Langchain, LlamaIndex, and CrewAI for advanced RAG and agentic systems. Skilled in Python, SQL, major cloud platforms (AWS, IBM Watsonx), and vector databases (FAISS, Chroma). Proven ability to design and implement scalable, resilient data engineering solutions (ETL, multiprocessing, Prefect) and robust API services (Flask).
+                </p>
+                 <p class="fade-in delay-3">
+                    Adept at leading technical initiatives, architecting modular and maintainable systems, optimizing complex workflows, and integrating diverse AI models (OpenAI, Anthropic, LLaMA, etc.). Demonstrated success in significantly reducing manual effort and driving revenue through intelligent automation in sectors including healthcare, finance, and sports analytics.
+                 </p>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" data-section="projects" class="angled-separator">
+            <div class="container">
+                <h2 class="fade-in">Projects</h2>
+
+                 <div class="project-grid">
+                    <div class="project-card glass-card fade-in delay-1" data-tilt>
+                         <h3><svg class="icon-svg icon-leading"><use xlink:href="#icon-gen-ai"></use></svg>Genie AI Platform</h3>
+                         <p class="description">Architected and led the development of a scalable, no-code/low-code GenAI platform utilizing RAG and agentic workflows. Empowered 450+ internal users and generated substantial business value.</p>
+                         <span class="tech-label"><svg class="icon-svg icon-leading"><use xlink:href="#icon-tools"></use></svg>Technologies</span>
+                         <div class="tags">
+                            <span>Langchain</span> <span>CrewAI</span> <span>Agentic RAG</span> <span>Vector DBs</span> <span>PostgreSQL</span> <span>OpenAI</span> <span>Anthropic</span> <span>Watsonx</span> <span>React</span> <span>Python</span> <span>MLOps</span>
+                         </div>
+                         <span class="highlights-label"><svg class="icon-svg icon-leading"><use xlink:href="#icon-star"></use></svg>Key Highlights</span>
+                          <ul>
+                             <li>Decoupled & Modular Architecture</li>
+                             <li>Multi-Agent Orchestration (CrewAI)</li>
+                             <li>Configurable RAG Pipeline</li>
+                             <li>Intuitive No-Code Interface</li>
+                             <li>Production Monitoring & Guardrails</li>
+                          </ul>
+                     </div>
+
+                      <div class="project-card glass-card fade-in delay-2" data-tilt>
+                         <h3><svg class="icon-svg icon-leading"><use xlink:href="#icon-database"></use></svg>Social Media Listening Engine</h3>
+                         <p class="description">Co-developed a high-throughput system analyzing 1M+ social media posts for medical conference intelligence, featuring a bespoke multi-category sentiment analysis engine.</p>
+                         <span class="tech-label"><svg class="icon-svg icon-leading"><use xlink:href="#icon-tools"></use></svg>Technologies</span>
+                         <div class="tags">
+                            <span>Python</span> <span>NLP</span> <span>Custom Sentiment</span> <span>Multiprocessing</span> <span>Batch Processing</span> <span>Pandas</span> <span>Data Pipelines</span>
+                         </div>
+                         <span class="highlights-label"><svg class="icon-svg icon-leading"><use xlink:href="#icon-star"></use></svg>Key Highlights</span>
+                          <ul>
+                            <li>Custom 7-Category Sentiment Model</li>
+                            <li>Massive Scalability (1M+ Records)</li>
+                            <li>>95% Reduction in Manual Tagging</li>
+                            <li>Resilient, Fault-Tolerant Framework</li>
+                          </ul>
+                     </div>
+
+                     <div class="project-card glass-card fade-in delay-3" data-tilt>
+                         <h3><svg class="icon-svg icon-leading"><use xlink:href="#icon-code"></use></svg>Genie_StreamX Inference Engine</h3>
+                         <p class="description">Rapidly engineered a highly configurable, multiprocessing inference engine enabling scalable API orchestration (classification, annotation) over large Excel/SQL datasets via simple YAML setup.</p>
+                         <span class="tech-label"><svg class="icon-svg icon-leading"><use xlink:href="#icon-tools"></use></svg>Technologies</span>
+                         <div class="tags">
+                              <span>Python</span> <span>Multiprocessing</span> <span>YAML Config</span> <span>PostgreSQL</span> <span>API Orchestration</span> <span>ETL</span> <span>Framework Design</span>
+                         </div>
+                         <span class="highlights-label"><svg class="icon-svg icon-leading"><use xlink:href="#icon-star"></use></svg>Key Highlights</span>
+                          <ul>
+                             <li>Rapid Development (3 Days)</li>
+                             <li>Zero-Code Use Case Configuration</li>
+                             <li>Dual Data Source Support (Excel/SQL)</li>
+                             <li>Optimized PostgreSQL Pipeline</li>
+                             <li>Accelerated Experimentation Cycle</li>
+                          </ul>
+                     </div>
+
+                     <div class="project-card glass-card fade-in delay-1" data-tilt>
+                         <h3><svg class="icon-svg icon-leading"><use xlink:href="#icon-article"></use></svg>Automated Document Extraction</h3>
+                         <p class="description">Built and evolved an ML pipeline automating key field extraction from diverse onboarding documents, migrating from LayoutLM to advanced Vision-LLM models (PHI-Vision, LLaMA-3) for superior accuracy.</p>
+                         <span class="tech-label"><svg class="icon-svg icon-leading"><use xlink:href="#icon-tools"></use></svg>Technologies</span>
+                         <div class="tags">
+                              <span>LayoutLMv2</span> <span>CNN/BERT</span> <span>Vision LLMs</span> <span>LLaMA-3</span> <span>Watsonx</span> <span>MLflow</span> <span>MLOps</span> <span>Python</span> <span>Document AI</span>
+                         </div>
+                         <span class="highlights-label"><svg class="icon-svg icon-leading"><use xlink:href="#icon-star"></use></svg>Key Highlights</span>
+                          <ul>
+                            <li>End-to-End Extraction Pipeline</li>
+                            <li>Advanced Spatial/Layout Understanding</li>
+                            <li>Intelligent Document Classification</li>
+                            <li>Robust MLOps Integration</li>
+                            <li>Significant Manual Effort Reduction</li>
+                          </ul>
+                     </div>
+                 </div>
+
+                 <div style="text-align: center;">
+                    <h3 class="other-projects-title fade-in">Other Key Projects</h3>
+                 </div>
+                 <div class="timeline">
+                     <div class="timeline-progress"></div>
+                     <div class="timeline-item">
+                        <h4><svg class="icon-svg icon-leading"><use xlink:href="#icon-briefcase"></use></svg>Insurance Claim Fraud Detection</h4>
+                         <p class="description">Developed ML classification models to identify potentially fraudulent insurance claims, prioritizing high-risk cases for manual review and improving detection accuracy.</p>
+                        <ul>
+                            <li>Engineered features indicative of fraudulent patterns.</li>
+                            <li>Utilized Scikit-learn for model training and evaluation.</li>
+                            <li>Improved efficiency of the claims review process.</li>
+                        </ul>
+                     </div>
+                     <div class="timeline-item">
+                         <h4><svg class="icon-svg icon-leading"><use xlink:href="#icon-briefcase"></use></svg>HR Employee Attrition Analysis</h4>
+                         <p class="description">Constructed an analytics pipeline using ML to uncover key factors driving employee attrition, providing actionable insights to enhance retention strategies.</p>
+                         <ul>
+                             <li>Performed exploratory data analysis on diverse HR datasets.</li>
+                             <li>Identified significant predictors of attrition using feature importance.</li>
+                             <li>Delivered data-driven recommendations for HR interventions.</li>
+                         </ul>
+                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" data-section="skills" class="angled-separator-reverse">
+            <div class="container">
+                <h2 class="fade-in">Skills & Expertise</h2>
+                 <div class="skills-container">
+                    <div class="skills-category glass-card fade-in delay-1">
+                        <h3><svg class="icon-svg icon-leading"><use xlink:href="#icon-gen-ai"></use></svg>Generative AI & LLM</h3>
+                        <div class="skills-list">
+                            <span>Langchain</span> <span>LlamaIndex</span> <span>Agentic RAG</span> <span>Multi-Agent (CrewAI)</span> <span>Custom Toolchains</span> <span>Prompt Engineering</span> <span>Vector DBs (FAISS, Chroma)</span> <span>OpenAI API</span> <span>Anthropic API</span> <span>IBM Watsonx.ai</span> <span>Google Gemini API</span> <span>AWS Bedrock</span> <span>LLM Guardrails</span> <span>Fine-tuning (Basic)</span>
+                        </div>
+                    </div>
+                    <div class="skills-category glass-card fade-in delay-2">
+                         <h3><svg class="icon-svg icon-leading"><use xlink:href="#icon-ai-brain"></use></svg>Machine Learning & NLP</h3>
+                        <div class="skills-list">
+                            <span>Classification</span> <span>Regression</span> <span>Clustering</span> <span>Dimensionality Reduction</span> <span>NLP Fundamentals</span> <span>Sentiment Analysis</span> <span>NER</span> <span>Text Classification</span> <span>Scikit-learn</span> <span>Transformers (BERT)</span> <span>CNNs</span> <span>LayoutLMv2 / Vision LLMs</span> <span>MLflow (MLOps)</span> <span>Feature Engineering</span>
+                        </div>
+                    </div>
+                     <div class="skills-category glass-card fade-in delay-3">
+                         <h3><svg class="icon-svg icon-leading"><use xlink:href="#icon-database"></use></svg>Data Engineering & Tools</h3>
+                        <div class="skills-list">
+                            <span>Python (Expert)</span> <span>SQL (PostgreSQL, MySQL)</span> <span>ETL Frameworks</span> <span>Pandas / NumPy</span> <span>Data Pipelines (Prefect)</span> <span>Multiprocessing</span> <span>Shell Scripting</span> <span>Docker (Basic)</span> <span>Git & GitHub</span> <span>GitHub Actions (CI/CD)</span> <span>AWS (EC2, S3 Basic)</span> <span>Jupyter Notebooks</span> <span>VS Code</span> <span>Flask</span>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Core Competencies Section -->
+        <section id="core-competencies" data-section="core-competencies" class="angled-separator">
+            <div class="container">
+                <h2 class="fade-in">Core Competencies</h2>
+                <div class="competencies-container fade-in delay-1">
+                    <div class="skills-category glass-card">
+                        <h3><svg class="icon-svg icon-leading"><use xlink:href="#icon-code"></use></svg>Professional & Methodological Skills</h3>
+                        <div class="skills-list">
+                            <span>Problem Solving</span> <span>Algorithm Design</span> <span>System Architecture</span> <span>Technical Leadership</span> <span>Mentoring</span> <span>Agile Methodologies</span> <span>Communication</span> <span>Stakeholder Management</span> <span>Continuous Learning</span> <span>Performance Optimization</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Beyond The Code Section -->
+        <section id="beyond-code" data-section="beyond-code" class="angled-separator-reverse">
+            <div class="container">
+                <h2 class="fade-in">Beyond The Code</h2>
+                 <div class="card-grid">
+                     <div class="info-card glass-card fade-in delay-1">
+                         <div class="icon-wrapper"><svg class="icon-svg"><use xlink:href="#icon-article"></use></svg></div>
+                         <p>Authored technical articles on <a href="[YOUR_MEDIUM_LINK_HERE]" target="_blank" rel="noopener noreferrer">Medium</a> exploring scalable Agentic RAG architectures and advanced document AI techniques.</p>
+                     </div>
+                     <div class="info-card glass-card fade-in delay-2">
+                         <div class="icon-wrapper"><svg class="icon-svg"><use xlink:href="#icon-community"></use></svg></div>
+                         <p>Actively mentor junior engineers and data scientists, providing guidance on LLM frameworks and best practices in AI development.</p>
+                     </div>
+                     <div class="info-card glass-card fade-in delay-3">
+                         <div class="icon-wrapper"><svg class="icon-svg"><use xlink:href="#icon-presentation"></use></svg></div>
+                         <p>Regularly present technical deep-dives and project showcases at internal AI conferences and knowledge-sharing sessions.</p>
+                     </div>
+                     <div class="info-card glass-card fade-in delay-4">
+                        <div class="icon-wrapper"><svg class="icon-svg"><use xlink:href="#icon-community"></use></svg></div>
+                        <p>Engage with the broader AI community through conferences and online forums to exchange ideas and stay current with emerging trends.</p>
+                    </div>
+                    <div class="info-card glass-card fade-in delay-5">
+                        <div class="icon-wrapper"><svg class="icon-svg"><use xlink:href="#icon-lightbulb"></use></svg></div>
+                        <p>Dedicated to continuous self-improvement through research, experimentation, and pursuing relevant certifications.</p>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Education & Certifications Section -->
+        <section id="education" data-section="education" class="angled-separator">
+            <div class="container">
+                 <h2 class="fade-in">Education & Certifications</h2>
+                 <div class="edu-cert-grid">
+                     <div class="education-col glass-card fade-in delay-1">
+                         <h3><svg class="icon-svg icon-leading"><use xlink:href="#icon-graduation-cap"></use></svg>Education</h3>
+                         <div class="edu-item">
+                            <h4>Bachelor of Engineering (Computer Engineering)</h4>
+                            <p>Marathwada Mitra Mandal's Institute of Technology (MMIT)</p>
+                            <p>Lohegaon, Pune, India</p>
+                            <p><i>Affiliated to Savitribai Phule Pune University</i></p>
+                            <p style="margin-top: 1rem;">Graduated: 2019</p>
+                         </div>
+                     </div>
+                      <div class="certifications-col glass-card fade-in delay-2">
+                         <h3><svg class="icon-svg icon-leading"><use xlink:href="#icon-certificate"></use></svg>Certifications</h3>
+                         <ul class="cert-list">
+                             <li>IBM Certified Technical Specialist - Watsonx.ai Generative AI Tools (Intermediate)</li>
+                             <li>IBM Watsonx.ai Sales Foundation</li>
+                             <li>Machine Learning with Python</li>
+                         </ul>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" data-section="contact" class="angled-separator-reverse">
+            <div class="container">
+                <h2 class="fade-in">Let's Collaborate</h2>
+                <p class="contact-intro fade-in delay-1">
+                    I'm passionate about tackling challenging problems and building innovative AI solutions. If you have a project in mind, an exciting opportunity, or simply want to discuss the potential of AI, I'd love to hear from you.
+                </p>
+                <div class="contact-grid-wrapper fade-in delay-2">
+                    <div class="contact-grid">
+                        <div class="contact-details">
+                             <div class="detail-item">
+                                 <svg class="icon-svg"><use xlink:href="#icon-email"></use></svg>
+                                 <div class="detail-content">
+                                     <span class="detail-label">Email</span>
+                                     <span class="detail-value"><a href="mailto:nageshmustapure96@gmail.com">nageshmustapure96@gmail.com</a></span>
+                                 </div>
+                             </div>
+                             <div class="detail-item">
+                                <svg class="icon-svg"><use xlink:href="#icon-phone"></use></svg>
+                                <div class="detail-content">
+                                    <span class="detail-label">Phone</span>
+                                    <span class="detail-value"><a href="tel:+918485060139">+91 8485060139</a></span>
+                                </div>
+                             </div>
+                             <div class="detail-item">
+                                <svg class="icon-svg"><use xlink:href="#icon-linkedin"></use></svg>
+                                <div class="detail-content">
+                                    <span class="detail-label">LinkedIn</span>
+                                    <span class="detail-value"><a href="https://linkedin.com/in/nageshmustapure" target="_blank" rel="noopener noreferrer">linkedin.com/in/nageshmustapure</a></span>
+                                </div>
+                             </div>
+                              <div class="detail-item">
+                                <svg class="icon-svg"><use xlink:href="#icon-location"></use></svg>
+                                <div class="detail-content">
+                                    <span class="detail-label">Location</span>
+                                    <span class="detail-value">Hyderabad, India <br>(Open to Remote & Relocation)</span>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="contact-form">
+                            <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                                <input type="hidden" name="_subject" value="New Portfolio Contact Message!">
+                                <div class="form-group" style="margin-bottom: 1.5rem;">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" id="name" name="name" placeholder="e.g., Ada Lovelace" required>
+                                </div>
+                                <div class="form-group" style="margin-bottom: 1.5rem;">
+                                    <label for="email">Your Email</label>
+                                    <input type="email" id="email" name="email" placeholder="e.g., ada@example.com" required>
+                                </div>
+                                 <div class="form-group" style="margin-bottom: 1.5rem;">
+                                    <label for="message">Your Message</label>
+                                    <textarea id="message" name="message" placeholder="Let's discuss how AI can..." rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    Send Message <svg class="icon-svg" style="margin-left: 0.5em;"><use xlink:href="#icon-send"></use></svg>
+                                </button>
+                            </form>
+                             <div id="form-success-message">
+                                <svg class="icon-svg" style="font-size: 1.5em; margin-right: 0.5em; vertical-align: -0.2em;"><use xlink:href="#icon-checkmark"></use></svg>
+                                Message Sent! Thank you for reaching out. I'll be in touch soon.
+                             </div>
+                             <div id="form-error-message" style="display: none; color: var(--secondary-color); margin-top: 1rem;">
+                                 Oops! Something went wrong. Please try again later.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                 <div class="social-links">
+                     <a href="https://linkedin.com/in/nageshmustapure" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" title="LinkedIn"><svg class="icon-svg"><use xlink:href="#icon-linkedin"></use></svg></a>
+                     <a href="https://github.com/NageshMustapure" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" title="GitHub"><svg class="icon-svg"><use xlink:href="#icon-github"></use></svg></a>
+                     <a href="[YOUR_MEDIUM_LINK_HERE]" target="_blank" rel="noopener noreferrer" aria-label="Medium Articles" title="Medium Articles"><svg class="icon-svg"><use xlink:href="#icon-article"></use></svg></a>
+                      <a href="mailto:nageshmustapure96@gmail.com" aria-label="Email Nagesh" title="Send Email"><svg class="icon-svg"><use xlink:href="#icon-email"></use></svg></a>
+                 </div>
+                <p>© <span id="current-year"></span> Nagesh Mustapure. All rights reserved.</p>
+                <p>Designed & Built with <span class="heart">&hearts;</span> and Generative AI assistance.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll-to-Top Button -->
+    <button id="scroll-to-top" title="Go to top">
+        <svg class="icon-svg" style="margin:0;"><use xlink:href="#icon-arrow-up"></use></svg>
+    </button>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const throttle = (func, limit) => {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        };
+
+        // --- Active Navigation Link Highlighting ---
+        const navLinks = document.querySelectorAll('#nav-links a');
+        const sections = document.querySelectorAll('main section[data-section]');
+        const headerHeight = document.querySelector('header')?.offsetHeight || 70;
+
+        const changeNavOnScroll = () => {
+            let currentSectionId = '';
+            sections.forEach(current => {
+                const sectionTop = current.offsetTop - headerHeight - 100;
+                if (window.scrollY >= sectionTop) {
+                    currentSectionId = current.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentSectionId) {
+                    link.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', throttle(changeNavOnScroll, 100));
+        changeNavOnScroll();
+
+        // --- Scroll-Based Animations ---
+        const observerCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    if(entry.target.classList.contains('timeline-item')) {
+                        updateTimelineProgress();
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+        const observer = new IntersectionObserver(observerCallback, { root: null, rootMargin: '0px', threshold: 0.15 });
+        document.querySelectorAll('.fade-in, .timeline-item').forEach(el => observer.observe(el));
+        
+        // --- Timeline Progress Animation ---
+        const timeline = document.querySelector('.timeline');
+        const timelineProgress = document.querySelector('.timeline-progress');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        
+        function updateTimelineProgress() {
+            if (!timeline || !timelineProgress) return;
+            const visibleItems = document.querySelectorAll('.timeline-item.is-visible');
+            if (visibleItems.length === 0) {
+                timelineProgress.style.height = '0px';
+                return;
+            }
+            const lastVisibleItem = visibleItems[visibleItems.length - 1];
+            const timelineRect = timeline.getBoundingClientRect();
+            const lastItemRect = lastVisibleItem.getBoundingClientRect();
+            const progressHeight = lastItemRect.top - timelineRect.top + lastItemRect.height / 2;
+            timelineProgress.style.height = `${Math.min(progressHeight, timeline.offsetHeight)}px`;
+        }
+        window.addEventListener('scroll', throttle(updateTimelineProgress, 50));
+        window.addEventListener('resize', throttle(updateTimelineProgress, 50));
+
+        // --- 3D Card Tilt Effect ---
+        const tiltElements = document.querySelectorAll('[data-tilt]');
+        tiltElements.forEach(el => {
+            const maxTilt = 10; // degrees
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const { width, height } = rect;
+                const rotateX = (y / height - 0.5) * -maxTilt;
+                const rotateY = (x / width - 0.5) * maxTilt;
+                el.style.transform = `translateY(-10px) scale(1.02) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = `translateY(-10px) scale(1.02) perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+            });
+             el.addEventListener('mouseenter', () => {
+                el.style.transition = 'none';
+             });
+             el.addEventListener('mouseleave', () => {
+                el.style.transition = 'all var(--transition-medium) var(--transition-timing)';
+                el.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+        });
+
+        // --- Scroll-to-Top Button Logic ---
+        const scrollTopButton = document.getElementById('scroll-to-top');
+        if (scrollTopButton) {
+            const scrollThreshold = 400;
+            const toggleVisibility = () => {
+                if (window.scrollY > scrollThreshold) {
+                    scrollTopButton.classList.add('visible');
+                } else {
+                    scrollTopButton.classList.remove('visible');
+                }
+            };
+            window.addEventListener('scroll', throttle(toggleVisibility, 150));
+            scrollTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // --- Contact Form Submission Handler ---
+        const contactForm = document.getElementById('contact-form');
+        const successMessage = document.getElementById('form-success-message');
+        if (contactForm && successMessage) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const submitButton = form.querySelector('button[type="submit"]');
+                const originalButtonHTML = submitButton.innerHTML;
+                submitButton.disabled = true;
+                submitButton.innerHTML = `Sending... <svg class="icon-svg" style="animation: spin 1.5s linear infinite; width: 1em; height: 1em; margin-left: 0.5em;"><use xlink:href="#icon-loading"></use></svg>`;
+                
+                const data = new FormData(form);
+                try {
+                    const response = await fetch(form.action, {
+                        method: form.method,
+                        body: data,
+                        headers: {'Accept': 'application/json'}
+                    });
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        successMessage.style.display = 'block';
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    const errorMessage = document.getElementById('form-error-message');
+                    if(errorMessage) errorMessage.style.display = 'block';
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonHTML;
+                }
+            });
+        }
+        try {
+            const styleSheet = document.styleSheets[0];
+            styleSheet.insertRule(`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`, styleSheet.cssRules.length);
+        } catch (e) { console.warn("Could not insert CSS rule for spinner:", e); }
+
+        // --- Set Current Year in Footer ---
+        const yearSpan = document.getElementById('current-year');
+        if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+        // --- START: Dynamic Skills Cube Logic ---
+        const skills = [
+            "Generative AI", "LangChain", "LlamaIndex", "Agentic RAG", "Multi-Agent Systems",
+            "CrewAI", "Custom Toolchains", "Prompt Engineering", "Vector DBs", "FAISS", "ChromaDB",
+            "OpenAI API", "Anthropic API", "IBM Watsonx.ai", "Google Gemini", "AWS Bedrock",
+            "LLM Guardrails", "LLM Fine-Tuning", "Machine Learning", "NLP", "Classification",
+            "Regression", "Clustering", "Scikit-learn", "Transformers", "BERT", "CNNs",
+            "Vision LLMs", "MLflow", "Feature Engineering", "Data Engineering", "Python", "SQL",
+            "ETL Frameworks", "Pandas", "NumPy", "Data Pipelines", "Prefect", "Multiprocessing",
+            "Shell Scripting", "Docker", "Git & GitHub", "GitHub Actions", "AWS (EC2, S3)",
+            "Jupyter", "VS Code"
+        ];
+        const UPDATE_INTERVAL = 3000;
+        const FADE_TIME = 250;
+        const faceHeadings = document.querySelectorAll('.cube-face h2');
+        let currentSkillIndex = 0;
+
+        function updateSkills() {
+            if (faceHeadings.length === 0) return; // Safety check
+            
+            faceHeadings.forEach(h2 => h2.classList.add('text-fade-out'));
+
+            setTimeout(() => {
+                faceHeadings.forEach(h2 => {
+                    const skillIndex = currentSkillIndex % skills.length;
+                    h2.textContent = skills[skillIndex];
+                    currentSkillIndex++;
+                });
+                faceHeadings.forEach(h2 => h2.classList.remove('text-fade-out'));
+            }, FADE_TIME);
+        }
+
+        updateSkills(); // Initial population
+        setInterval(updateSkills, UPDATE_INTERVAL); // Set recurring updates
+        // --- END: Dynamic Skills Cube Logic ---
+    });
+    </script>
+</body>
+</html>
